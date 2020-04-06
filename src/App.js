@@ -2,22 +2,21 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
 
-let html;
 function App() {
   let count = useSelector(state => state.count);
   let color = useSelector(state => state.color);
   let box = useSelector(state => state.box);
   let status = true;
 
-  let render = () => {
-    html = box.map((item) => {
-      return <div style={{ width: '100px', height: '100px', backgroundColor: `${item.color}` }}>box
-  <input onKeyPress={(e) => keyPressed2(e, item.id)} type="text" />
-      </div>
-    })
-  }
+  // let render = () => {
+  //   html = box.map((item) => {
+  //     return <div style={{ width: '100px', height: '100px', backgroundColor: `${item.color}` }}>box
+  // <input onKeyPress={(e) => keyPressed2(e, item.id)} type="text" />
+  //     </div>
+  //   })
+  // }
 
-  html = box.map((item) => {
+  let html = box.map((item) => {
     return <div style={{ width: '161px', height: '100px', backgroundColor: `${item.color}`, margin:'10px', border:'black solid 1px' }}>box {item.id+1}
 <input onKeyPress={(e) => keyPressed2(e, item.id)} type="text" />
     </div>
@@ -26,7 +25,7 @@ function App() {
   let dispatch = useDispatch();
   let increase = () => {
     dispatch({ type: 'INCREMENT', payload: { id: count, color: color } });
-    status = !status;
+    // status = !status;
   }
 
   let decrease = () => {
@@ -36,17 +35,17 @@ function App() {
 
   let reset = () => {
     dispatch({ type: 'RESET' });
-    status = !status;
+    // status = !status;
   }
 
   let colorAll = (value) => {
     dispatch({ type: 'COLOR', payload: value });
-    status = !status;
+    // status = !status;
   }
 
   let colorEach = (value, id) => {
     dispatch({ type: 'COLOREACH', payload: { color: value, id: id } });
-    status = !status;
+    // status = !status;
   }
 
   let keyPressed = (e) => {
@@ -54,7 +53,7 @@ function App() {
       colorAll(e.target.value)
     };
     console.log(e.target.value);
-    status = !status;
+    // status = !status;
   }
 
   let keyPressed2 = (e, id) => {
@@ -64,10 +63,10 @@ function App() {
     };
     console.log(e.target.value);
     console.log(id);
-    status = !status;
+    // status = !status;
   }
 
-  useEffect(render, [status])
+  // useEffect(render, [status])
 
   return (
     <div className="App">

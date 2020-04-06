@@ -3,11 +3,52 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux'
+
+let State = {
+  count: 0,
+  color: 'red',
+  box: []
+}
+
+function Reducer(state = State, action) {
+  if (action.type === 'INCREMENT') {
+    state.count++;
+    state.box.push(action.payload)
+    console.log(state.box)
+  };
+  if (action.type === 'DECREMENT') {
+    state.count--;
+    state.box.pop();
+  };
+  if (action.type === 'RESET' || state.count < 0) {
+    state.count =0;
+    state.box = []
+  };
+
+  if (action.type === 'COLOR') {
+    state.color = action.payload;
+    console.log('color works', action.payload);
+    state.box.map((item)=>{
+      item.color = action.payload
+    })
+  };
+
+  if (action.type === 'COLOREACH') {
+    
+    console.log('color works', action.payload);
+    state.box[action.payload.id].color = action.payload.color
+  };
+  return state
+}
+
+let store = createStore(Reducer)
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 

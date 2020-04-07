@@ -38,7 +38,9 @@ function Reducer(state = State, action) {
   if (action.type === 'COLOREACH') {
     
     console.log('color works', action.payload);
-    state.box[action.payload.id].color = action.payload.color
+    
+    state.box[action.payload.id].color = action.payload.color;
+    console.log('box', state.box);
   };
   return state
 }
